@@ -32,19 +32,64 @@ $('#easy-mode').on('click',function(){
       console.log('start click');
       switch (difficulty) {
         case 'easy':
-        randomNumber(1, 10);
         console.log('selected easy mode');
-console.log(targetNumber);
+
+          $.ajax({
+            type: 'POST',
+            url: '/randomNumber',
+            data: { max : 10 },
+            success: function (response) {
+              targetNumber = response;
+              console.log(targetNumber);
+            }
+
+          }); //end of AJAX
+
+
+
+
+
+
+
+
         break;
 
         case 'medium':
         console.log('selected medium mode');
-        randomNumber(1, 100);
-console.log(targetNumber);
+
+        $.ajax({
+          type: 'POST',
+          url: '/randomNumber',
+          data: { max : 100 },
+          success: function (response) {
+            targetNumber = response;
+            console.log(targetNumber);
+          }
+
+        }); //end of AJAX
+
+
         break;
+
+
+
+
+
+
         case 'hard':
         console.log('selected hard mode');
-          randomNumber(1, 10000);
+
+          $.ajax({
+            type: 'POST',
+            url: '/randomNumber',
+            data: { max : 10000 },
+            success: function (response) {
+              targetNumber = response;
+              console.log(targetNumber);
+            }
+
+          }); //end of AJAX
+
           break;
         default:
 console.log(targetNumber);
@@ -75,20 +120,21 @@ compare();
 
 
   });//end of document.ready
-  function randomNumber(min, max){
-    targetNumber = Math.floor(Math.random() * (1 + max - min) + min);
-    //console.log(targetNumber);
-    return targetNumber;
-
-}
+//   function randomNumber(min, max){
+//     targetNumber = Math.floor(Math.random() * (1 + max - min) + min);
+//     //console.log(targetNumber);
+//     return targetNumber;
+//
+// }
 
 function compare() {
+  console.log('Target Number is ' + targetNumber);
 for (var i = 0; i < guessesArray.length; i++) {
-  if (guessesArray[i] == targetNumber ) {
+  if (parseInt(guessesArray[i]) == targetNumber ) {
     console.log('winner winner chicken dinner');
-  } else if (guessesArray[i] > targetNumber) {
+  } else if (parseInt(guessesArray[i]) > targetNumber) {
     console.log("guess lower");
-  } else if (guessesArray[i] < targetNumber) {
+  } else if (parseInt(guessesArray[i]) < targetNumber) {
     console.log("guess higher");
   }
 } //end of the for loop if else function
