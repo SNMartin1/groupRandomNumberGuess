@@ -20,13 +20,11 @@ $('#easy-mode').on('click',function(){
     });//end of hard mode
 
 
-
     $('#start').on('click', function(){
       console.log('start click');
       switch (difficulty) {
         case 'easy':
         console.log('selected easy mode');
-
 
           break;
           case 'medium':
@@ -44,9 +42,7 @@ console.log('selected hard mode');
     });
 
 
-
   });//end of document.ready
-
   function randomNumber(min, max){
     return Math.floor(Math.random() * (1 + max - min) + min);
 }
